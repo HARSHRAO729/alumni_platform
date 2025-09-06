@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mentorship</h2>
+<form method="post" class="mb-4">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">{{ form.topic.label }} {{ form.topic(class="form-control") }}</div>
+  <div class="mb-3">{{ form.details.label }} {{ form.details(class="form-control", rows=3) }}</div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+
+<div class="row g-4">
+  <div class="col-md-6">
+    <h5>My Requests</h5>
+    <ul class="list-group">
+      {% for r in my_requests %}
+        <li class="list-group-item">
+          <strong>{{ r.topic }}</strong> — <span class="badge bg-secondary">{{ r.status }}</span><br>
+          {{ r.details }}
+        </li>
+      {% else %}
+        <li class="list-group-item">No requests.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h5>Open Requests</h5>
+    <ul class="list-group">
+      {% for r in open_requests %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ r.topic }}</strong> — <span class="badge bg-secondary">{{ r.status }}</span><br>
+            {{ r.details }}
+          </div>
+          {% if current_user.id != r.requester_id %}
+          <a class="btn btn-sm btn-success" href="{{ url_for('mentorship_accept', req_id=r.id) }}">Accept</a>
+          {% endif %}
+        </li>
+      {% else %}
+        <li class="list-group-item">No open requests.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

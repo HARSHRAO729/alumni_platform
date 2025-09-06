@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin • Verify Alumni</h2>
+<ul class="list-group">
+  {% for u in unverified %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ u.full_name }}</strong> — {{ u.email }}<br>
+        {{ u.degree or '' }} {{ u.branch or '' }} • {{ u.batch or '' }}
+      </div>
+      <a class="btn btn-sm btn-success" href="{{ url_for('admin_verify', user_id=u.id) }}">Verify</a>
+    </li>
+  {% else %}
+    <li class="list-group-item">No pending verifications.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

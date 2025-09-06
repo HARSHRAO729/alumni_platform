@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+  <h2>Jobs</h2>
+  {% if current_user.is_authenticated %}
+  <a class="btn btn-primary" href="{{ url_for('jobs_new') }}">Post Job</a>
+  {% endif %}
+</div>
+<ul class="list-group mt-3">
+  {% for j in items %}
+    <li class="list-group-item">
+      <h5>{{ j.title }} <small class="text-muted">at {{ j.company or '—' }}</small></h5>
+      <p class="mb-1">{{ j.description }}</p>
+      {% if j.apply_link %}<a href="{{ j.apply_link }}" target="_blank">Apply</a>{% endif %}
+      <div class="text-muted">posted by {{ j.posted_by.full_name if j.posted_by else 'Admin' }} on {{ j.created_at.strftime('%b %d, %Y') }}</div>
+    </li>
+  {% else %}
+    <li class="list-group-item">No jobs yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

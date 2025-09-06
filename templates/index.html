@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Upcoming Events</h5>
+        <ul class="list-group list-group-flush">
+          {% for e in events %}
+          <li class="list-group-item">
+            <strong>{{ e.title }}</strong><br>
+            {{ e.start_at.strftime('%b %d, %Y %I:%M %p') }} – {{ e.location or 'TBA' }}
+          </li>
+          {% else %}
+            <li class="list-group-item">No events yet.</li>
+          {% endfor %}
+        </ul>
+        {% if current_user.is_authenticated %}
+          <a class="btn btn-sm btn-primary mt-3" href="{{ url_for('events_new') }}">Create Event</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Latest Jobs</h5>
+        <ul class="list-group list-group-flush">
+          {% for j in jobs %}
+          <li class="list-group-item">
+            <strong>{{ j.title }}</strong> at {{ j.company or '—' }}<br>
+            <a href="{{ j.apply_link }}" target="_blank">Apply</a>
+          </li>
+          {% else %}
+            <li class="list-group-item">No jobs yet.</li>
+          {% endfor %}
+        </ul>
+        {% if current_user.is_authenticated %}
+          <a class="btn btn-sm btn-primary mt-3" href="{{ url_for('jobs_new') }}">Post Job</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Verified Alumni Mentors</h5>
+        <ul class="list-group list-group-flush">
+          {% for m in mentors %}
+          <li class="list-group-item">
+            <strong>{{ m.full_name }}</strong><br>
+            {{ m.title or '' }} {{ m.company or '' }}<br>
+            {{ m.branch or '' }} {{ m.batch or '' }}
+          </li>
+          {% else %}
+            <li class="list-group-item">None yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

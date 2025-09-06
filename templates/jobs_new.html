@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Post a Job</h2>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">{{ form.title.label }} {{ form.title(class="form-control") }}</div>
+  <div class="mb-3">{{ form.company.label }} {{ form.company(class="form-control") }}</div>
+  <div class="mb-3">{{ form.description.label }} {{ form.description(class="form-control", rows=4) }}</div>
+  <div class="mb-3">{{ form.apply_link.label }} {{ form.apply_link(class="form-control") }}</div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

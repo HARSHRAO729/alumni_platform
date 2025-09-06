@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<p>Welcome, {{ current_user.full_name }}!</p>
+<div class="row g-3">
+  <div class="col-md-4"><a class="btn btn-outline-primary w-100" href="{{ url_for('profile') }}">Edit Profile</a></div>
+  <div class="col-md-4"><a class="btn btn-outline-primary w-100" href="{{ url_for('events_new') }}">Create Event</a></div>
+  <div class="col-md-4"><a class="btn btn-outline-primary w-100" href="{{ url_for('jobs_new') }}">Post a Job</a></div>
+</div>
+{% endblock %}

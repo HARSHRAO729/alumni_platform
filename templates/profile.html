@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Profile</h2>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="row g-3">
+    <div class="col-md-3">{{ form.batch.label }} {{ form.batch(class="form-control") }}</div>
+    <div class="col-md-3">{{ form.degree.label }} {{ form.degree(class="form-control") }}</div>
+    <div class="col-md-3">{{ form.branch.label }} {{ form.branch(class="form-control") }}</div>
+    <div class="col-md-3">{{ form.location.label }} {{ form.location(class="form-control") }}</div>
+  </div>
+  <div class="row g-3 mt-1">
+    <div class="col-md-6">{{ form.company.label }} {{ form.company(class="form-control") }}</div>
+    <div class="col-md-6">{{ form.title.label }} {{ form.title(class="form-control") }}</div>
+  </div>
+  <div class="mt-3">{{ form.linkedin.label }} {{ form.linkedin(class="form-control") }}</div>
+  <div class="mt-3">{{ form.bio.label }} {{ form.bio(class="form-control", rows=4) }}</div>
+  <div class="mt-3">{{ form.submit(class="btn btn-primary") }}</div>
+</form>
+{% endblock %}
